@@ -15,7 +15,7 @@ const loadApi = () => {
     booklist.innerHTML = '';
     totalResult.innerText = '';
     // call api 
-    const url = `http://openlibrary.org/search.json?q=${inputValue}`;
+    const url = `https://openlibrary.org/search.json?q=${inputValue}`;
     fetch(url)
         .then(res => res.json())
         .then(data => {
