@@ -12,26 +12,30 @@ const loadApi = () => {
         return;
     }
     // clear 
+    errorDiv.innerText = "";
     booklist.innerHTML = '';
     totalResult.innerText = '';
+    toggleSpinner('block');
     // call api 
     const url = `https://openlibrary.org/search.json?q=${inputValue}`;
     fetch(url)
         .then(res => res.json())
         .then(data => {
-            // error handling 
-            if (data.numFound === 0 || data.message === "Not Found") {
-                errorDiv.innerText = "NO Result Found";
-                input.value = '';
-                return;
-            }
-            else {
-                errorDiv.innerText = "";
-                input.value = '';
-                totalResult.innerText = `Results found:${data.numFound}`
-            }
+            errorHandling(data)
             loadBooks(data.docs)
         })
+};
+// error handling 
+const errorHandling = data => {
+    if (data.numFound === 0 || data.message === "Not Found") {
+        errorDiv.innerText = "NO Result Found";
+        input.value = '';
+        return;
+    }
+    else {
+        input.value = '';
+        totalResult.innerText = `Results found:${data.numFound}`
+    }
 };
 // showing books function 
 const loadBooks = books => {
@@ -44,11 +48,17 @@ const loadBooks = books => {
                         <div class="card-body">
                             <h3 class="card-title">${element.title}</h3>
                             <h6>First Publish:${element.first_publish_year}</h6>
+                            <h6>Publisher: ${element.publisher?.[0]} </h6>
                             <h5>Author:${element.author_name?.[0]}</h5>
                         </div>
                     </div>
         `;
         booklist.appendChild(div);
     });
-}
+    toggleSpinner('none');
+};
+// spinner function 
+const toggleSpinner = displayStyle => {
+    document.getElementById('spinner').style.display = displayStyle;
+};
 

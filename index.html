@@ -8,8 +8,10 @@
     <!-- bootstrap css  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <!-- bootstrap end  -->
 </head>
 <body>
+    <!-- header  -->
     <header>
         <h1 class="text-center mt-4 text-dark fw-bold">Welcome To Online Book Archive</h1>
         <form class="col-md-6 m-auto py-5">
@@ -21,9 +23,15 @@
             </div>
         </form>
     </header>
+    <!-- main  -->
     <main>
-        
         <section class="container">
+            <!-- spinner  -->
+            <div id="spinner" style="display: none;">
+                <div class="spinner-border d-flex mx-auto" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
             <!-- error div  -->
             <div id="error" class="text-center"></div>
             <!-- result count div  -->
