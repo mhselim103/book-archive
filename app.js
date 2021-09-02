@@ -1,9 +1,8 @@
 const input = document.getElementById('text-input');
-const button = document.getElementById('button');
 const booklist = document.getElementById('book-list')
 const totalResult = document.getElementById('search-result');
 const errorDiv = document.getElementById('error')
-button.addEventListener('click', function () {
+const loadApi = () => {
     const inputValue = input.value;
     // error 
     if (inputValue === "") {
@@ -31,12 +30,11 @@ button.addEventListener('click', function () {
                 input.value = '';
                 totalResult.innerText = `Results found:${data.numFound}`
             }
-            
             loadBooks(data.docs)
         })
-})
+};
+// showing books function 
 const loadBooks = books => {
-    
     books.forEach(element => {
         const div = document.createElement('div')
         div.classList.add('col')
@@ -46,7 +44,7 @@ const loadBooks = books => {
                         <div class="card-body">
                             <h3 class="card-title">${element.title}</h3>
                             <h6>First Publish:${element.first_publish_year}</h6>
-                            <h5 id="author">Author:${element.author_name?.[0]}</h5>
+                            <h5>Author:${element.author_name?.[0]}</h5>
                         </div>
                     </div>
         `;
